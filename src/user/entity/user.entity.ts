@@ -13,7 +13,7 @@ export class User extends BaseEntity {
     @Column({ name: "lastname" })
     lastName: string;
 
-    @OneToMany(type => UserList, list => list.user)
+    @OneToMany(type => UserList, list => list.user, { eager: true} )
     userLists: UserList[];
 
 }
