@@ -10,9 +10,6 @@ export class UserList extends BaseEntity {
     @Column({ name: "name" })
     name: string;
 
-    @Column({ name: "userid" })
-    userId: number;
-
     @ManyToOne(type => User, user => user.userLists)
     user: User;
 
