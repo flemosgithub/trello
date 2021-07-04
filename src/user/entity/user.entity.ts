@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, BaseEntity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserList } from "./list.entity";
+import { UserList } from "./user-list.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -13,7 +13,7 @@ export class User extends BaseEntity {
     @Column({ name: "lastname" })
     lastName: string;
 
-    @OneToMany(type => UserList, list => list.user)
+    @OneToMany(type => UserList, userList => userList.user, { eager: true})
     userLists: UserList[];
 
 }
