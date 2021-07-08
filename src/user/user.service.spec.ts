@@ -35,7 +35,7 @@ describe('UserService', () => {
   });
 
   describe('createAsync', () => {
-    describe('when a user is creating by kafka', () => {
+    describe('when a user is created by kafka', () => {
       it('should return an array containing first and last name', async () => {
 
         const kafkaRecord = 'firstName:lastName';
