@@ -34,9 +34,10 @@ export class UserService {
         const createUserDto = new CreateUserDto();
         createUserDto.firstName = values[0];
         createUserDto.lastName = values[1];
+
         this.create(createUserDto);
 
-        console.log(message);
+        return values;
     }
 
 
