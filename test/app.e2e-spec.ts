@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
@@ -15,10 +15,28 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
+  const user = {
+      'user': 'fabio',
+      'pass': '123456'
+  };
+
+  let authorizationKey: string;
+
+  it('/ (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/user/login')
+      .send(user)
+      .expect(HttpStatus.CREATED)
+      .then(({ body }) => {
+          authorizationKey = body.accessToken
+      } )
+  });
+
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .get('/user')
+      .set('Authorization', 'Bearer ' + authorizationKey)
+      .expect(200);
   });
+
 });
